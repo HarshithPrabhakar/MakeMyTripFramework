@@ -23,6 +23,7 @@ public class BaseMMT {
 	public String pathProp = "./src/test/java/com/testdata/CommonData.properties";
 	
 	
+	
 	@BeforeClass
 	@Parameters({"browser"})
 	public void configBC(String browser)

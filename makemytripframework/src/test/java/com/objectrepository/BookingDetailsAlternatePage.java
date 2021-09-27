@@ -2,12 +2,14 @@ package com.objectrepository;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.testng.annotations.Factory;
 
-public class BookingPage {
-
-	@FindBy(xpath = "//span[text()='No, I do not wish to secure my trip']/parent::label/input")
+public class BookingDetailsAlternatePage {
+	
+	@FindBy(xpath = "//span[text()='I do not wish to secure my trip']/preceding-sibling::span")
 	private WebElement dontSecure;
+	
+	@FindBy(xpath = "//b[text()='Yes, Secure my trip. ']/parent::span/preceding-sibling::span")
+	private WebElement secure;
 	
 	@FindBy(xpath = "//button[@class=\"addTravellerBtn\"]")
 	private WebElement addTraveller;
@@ -38,65 +40,65 @@ public class BookingPage {
 	
 	@FindBy(xpath = "//button[text()='Proceed to pay']")
 	private WebElement proceedToPay;
+	
+	
+	
+	public WebElement getSecure() {
+		return secure;
+	}
 
 	public WebElement getDontSecure() {
 		return dontSecure;
 	}
 
-
 	public WebElement getAddTraveller() {
 		return addTraveller;
 	}
-
-
-	public WebElement getFirstName() {
-		return firstName;
-	}
-
-
-	public WebElement getLastName() {
-		return lastName;
-	}
-
-
-	public WebElement getMale() {
-		return male;
-	}
-
-
-	public WebElement getMobileNumber() {
-		return mobileNumber;
-	}
-
-
-	public WebElement getEmail() {
-		return email;
-	}
-
 
 	public WebElement getContinueBooking() {
 		return continueBooking;
 	}
 
+	public WebElement getFirstName() {
+		return firstName;
+	}
+
+	public WebElement getLastName() {
+		return lastName;
+	}
+
+	public WebElement getMale() {
+		return male;
+	}
+
+	public WebElement getMobileNumber() {
+		return mobileNumber;
+	}
+
+	public WebElement getEmail() {
+		return email;
+	}
 
 	public WebElement getConfirm() {
 		return confirm;
 	}
 
-
 	public WebElement getChooseSeats() {
 		return chooseSeats;
 	}
-	
+
+	public WebElement getProceedToPay() {
+		return proceedToPay;
+	}
+
 	// Dynamic Elements
 	private String selectSeat;
-	
+		
 	public String getSelectSeat() {
-		return selectSeat;
+			return selectSeat;
 	}
 
 	public void setSelectSeat(String seatNumber) {
-		this.selectSeat = " //div[@class=\"seat_label\" and text()="+"'" + seatNumber + "'"+"]/ancestor::div[@class=\"seat_row \"]/descendant::div[@class=\"seat_block cursor_pointer\"]";
+			this.selectSeat = "//div[@class=\"seatLabel\" and text()="+"'"+ seatNumber +"'"+"]/ancestor::div[@class=\"seatRow\"]/descendant::div[@class=\"seatBlock pointer\"]";
 	}
-	
 }

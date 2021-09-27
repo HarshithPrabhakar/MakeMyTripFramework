@@ -16,7 +16,8 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.genericlib.BaseMMT;
-import com.objectrepository.BookingPage;
+import com.objectrepository.BookingDetailsAlternatePage;
+import com.objectrepository.BookingDetailsPage;
 import com.objectrepository.FlightsListPage;
 import com.objectrepository.HomePage;
 
@@ -94,9 +95,27 @@ public class BookRoundTripTicket extends BaseMMT {
 		String cid = it.next();
 		driver.switchTo().window(cid);
 		
-		BookingPage bp = PageFactory.initElements(driver, BookingPage.class);
+		try {
+			BookingDetailsPage bp = PageFactory.initElements(driver, BookingDetailsPage.class);
+			bp.getDontSecure().click();
+			detailsTemplate1(bp);
+		}
+		catch(NoSuchElementException e)
+		{
+			Reporter.log("Switching to Template 2");
+			BookingDetailsAlternatePage bp = PageFactory.initElements(driver, BookingDetailsAlternatePage.class);
+			detailsTemplate2(bp);
+		}
+		
+	}
+	
+	public void detailsTemplate1(BookingDetailsPage bp) throws InterruptedException{
+		//bp.getDontSecure().click();
+		//Thread.sleep(5000);
+		bp.getSecure().click();
 		bp.getDontSecure().click();
-		//bp.getAddTraveller().click();
+		bp.getSecure().click();
+		bp.getContinueBooking().click();
 		bp.getFirstName().sendKeys(travellerFirstName);
 		bp.getLastName().sendKeys(travellerLastName);
 		bp.getMale().click();
@@ -104,9 +123,37 @@ public class BookRoundTripTicket extends BaseMMT {
 		bp.getEmail().sendKeys(emailId);
 		bp.getContinueBooking().click();
 		bp.getConfirm().click();
-		//bp.getChooseSeats().click();
 		bp.setSelectSeat(seatNumber);
 		driver.findElement(By.xpath(bp.getSelectSeat())).click();
-		
+		bp.getNext().click();
+		bp.setSelectSeat(seatNumber);
+		driver.findElement(By.xpath(bp.getSelectSeat())).click();
+		bp.getNext().click();
 	}
+	
+	public void detailsTemplate2(BookingDetailsAlternatePage bp) throws InterruptedException{
+		Thread.sleep(5000);
+		//bp.getDontSecure().click();
+		bp.getSecure().click();
+		bp.getAddTraveller().click();
+		bp.getFirstName().sendKeys(travellerFirstName);
+		bp.getLastName().sendKeys(travellerLastName);
+		Thread.sleep(5000);
+		bp.getMale().click();
+		bp.getMobileNumber().sendKeys(mobileNumber);
+		bp.getEmail().sendKeys(emailId);
+		bp.getContinueBooking().click();
+		bp.getConfirm().click();
+		bp.getChooseSeats().click();
+		seatNumber = "12";
+		bp.setSelectSeat(seatNumber);
+		driver.findElement(By.xpath(bp.getSelectSeat())).click();
+		bp.getContinueBooking().click();
+		bp.getChooseSeats().click();
+		bp.setSelectSeat(seatNumber);
+		driver.findElement(By.xpath(bp.getSelectSeat())).click();
+		bp.getContinueBooking().click();
+		bp.getProceedToPay().click();
+	}
+	
 }

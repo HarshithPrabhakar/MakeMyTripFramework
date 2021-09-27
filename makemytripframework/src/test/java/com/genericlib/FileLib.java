@@ -5,6 +5,7 @@ import java.util.Properties;
 
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.testng.annotations.DataProvider;
 
 public class FileLib {
 
@@ -43,6 +44,8 @@ public class FileLib {
 	 * @param cellNum
 	 * @return
 	 */
+	
+	@DataProvider(name = "fromExcel")
 	public String retrieveExcelData(String path, String sheetName, int rowNum, int cellNum)
 	{
 		FileInputStream ip = null;

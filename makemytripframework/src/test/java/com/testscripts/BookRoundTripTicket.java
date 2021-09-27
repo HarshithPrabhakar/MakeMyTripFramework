@@ -2,6 +2,7 @@ package com.testscripts;
 
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -22,8 +23,19 @@ public class BookRoundTripTicket extends BaseMMT {
 		wait = new WebDriverWait(driver, 20);
 		
 		HomePage hp = PageFactory.initElements(driver, HomePage.class);
-		wait.until(ExpectedConditions.elementToBeClickable(hp.getRoundTrip()));
-		hp.getRoundTrip().click();
+		//wait.until(ExpectedConditions.elementToBeClickable(hp.getRoundTrip()));
+		//hp.getRoundTrip().click();
+		try {
+		
+			hp.getCloseAd().click();
+		}
+		catch(NoSuchElementException e)
+		{
+			hp.getLogin().click();
+			hp.getRoundTrip().click();
+			hp.getFromCity().click();
+		
+		}
 		
 	}
 }

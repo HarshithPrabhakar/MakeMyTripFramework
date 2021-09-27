@@ -28,6 +28,20 @@ public class HomePage {
 	
 	@FindBy(xpath="//input[@placeholder=\"To\"]")
 	private WebElement toCityName;
+	
+	@FindBy(xpath="//span[@class=\"langCardClose\"]")
+	private WebElement closeAd;
+	
+	@FindBy(xpath = "//li[@data-cy=\"account\"]")
+	private WebElement login;
+
+	public WebElement getCloseAd() {
+		return closeAd;
+	}
+
+	public WebElement getLogin() {
+		return login;
+	}
 
 	public WebElement getRoundTrip() {
 		return roundTrip;

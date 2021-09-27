@@ -31,6 +31,14 @@ public class HomePage {
 	
 	@FindBy(xpath = "//li[@data-cy=\"account\"]")
 	private WebElement login;
+	
+	@FindBy(xpath = "//a[text()='Search']")
+	private WebElement search;
+	
+
+	public WebElement getSearch() {
+		return search;
+	}
 
 	public WebElement getCloseAd() {
 		return closeAd;

@@ -21,10 +21,7 @@ public class HomePage {
 	private WebElement returnDate;
 	
 	@FindBy(xpath="//input[@placeholder=\"From\"]")
-	private WebElement fromCityName;
-	
-	@FindBy(xpath="//p[text()=\"Mangalore, India\"]")
-	private WebElement fromSuggestion;
+	private WebElement fromCityName;	
 	
 	@FindBy(xpath="//input[@placeholder=\"To\"]")
 	private WebElement toCityName;
@@ -65,13 +62,31 @@ public class HomePage {
 
 	public WebElement getFromCityName() {
 		return fromCityName;
-	}
-
-	public WebElement getFromSuggestion() {
-		return fromSuggestion;
-	}
+	}	
 
 	public WebElement getToCityName() {
 		return toCityName;
+	}
+	
+	// Dynamic Elements
+	private String fromSuggestion;
+	
+	public String getFromSuggestion() {
+		return fromSuggestion;
+	}
+
+	public void setFromSuggestion(String cityName) {
+		this.fromSuggestion = "//li[@data-suggestion-index=\"0\"]/descendant::p[contains(text(),"+ cityName +")]";
+	}
+	
+	
+	private String selectDate;
+
+	public String getSelectDate() {
+		return selectDate;
+	}
+
+	public void setSelectDate(String selectDate) {
+		this.selectDate = "//div[@aria-label="+"'"+ selectDate +"'"+ "]";
 	}
 }
